@@ -133,4 +133,4 @@ Feel free to contribute to this project by forking this reopsitory and creating 
 If you encounter any issues of have suggestions for improvements, please open an issue in the repository 
 
 ## License
-This project is licensed under the MIT license.
+This project is licensed under the [MIT license](https://github.com/Cyrof/RemoteWakeServer/blob/main/LICENSE).
