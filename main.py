@@ -16,7 +16,7 @@ def get_var():
             'broadcast': os.environ['BROADCAST']
         }
     except Exception as e: 
-        raise e
+        raise Exception(f"Environment variable {str(e)} not set")
 
     return secrets
 
@@ -49,10 +49,12 @@ def send_wol(packet, broadcast):
 
     try:
         sock.sendto(packet, (broadcast, 9))
-        print("Message sent.")
+        print("Magic packet sent successfully!")
         sock.close()
     except Exception as e:
-        print("An error occured ", e)
+        print("An error occured while sending the magic packet: ", e)
+    finally:
+        sock.close()
 
 def main():
     """
@@ -61,9 +63,10 @@ def main():
     print("Wol script running...")
     try: 
         secret = get_var()
+        print(f"Retrieved MAC: {secret['mac']}, Broadcast: {secret['broadcast']}")
     except Exception as e:
         print("An error occured ", e)
-        print("MAC or broadcast missing.\nexiting...")
+        print("MAC or broadcast missing.\nExiting...")
         sys.exit()
 
     packet = wol_packet(secret['mac'])
